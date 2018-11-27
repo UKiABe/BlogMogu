@@ -1,0 +1,16 @@
+<%= form_with(model: @blog, local: true) do |form| %>
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title, length: 30 %>
+  </div>
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.hidden_field :content, id: :article_text %>
+    <trix-editor input="article_text"></trix-editor>
+  </div>
+  <div class="field">
+    <%= form.label :category %>
+    <%= form.select :category, ['最近のこと', 'ごはんレシピ'] %>
+  </div>
+  <%= form.submit %>
+<% end %>
