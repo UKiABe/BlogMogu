@@ -21,6 +21,14 @@
   <!-- Post Content -->
   <article>
     <div class="container">
+  <!-- 権限ある人だけに表示 -->
+      <% if can? :manage, current_user %>
+        <div class="row justify-content-end">
+          <%= link_to "編集", edit_blog_path(@blog), class: "btn btn-light" %>
+          <%= link_to "削除", blog_path(@blog),method: :delete, data: { confirm: "削除してもよろしいですか？" }, class: "btn btn-light" %>
+        </div>
+      <% end %>
+
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <%= @blog.content.html_safe %>
