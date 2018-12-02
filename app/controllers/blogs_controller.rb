@@ -25,8 +25,8 @@ class BlogsController < ApplicationController
     end
 
     if @blog.save
-      flash[:success] = "新しいブログ#{@blog.title}を作成しました。"
-      redirect_to blog_path(@blog)
+      format.html { redirect_to blog_path(@blog), flash[:success] = "新しいブログ#{@blog.title}を作成しました。" }
+      format.json { render :show, status: :created, location: @blog}
     else
       render "new"
     end
@@ -49,7 +49,7 @@ class BlogsController < ApplicationController
 
   private
     def blog_params
-      params.require(:blog).permit(:title, :category, :content)
+      params.require(:blog).permit(:title, :category, :content, :image)
     end
 
     def find_blog
