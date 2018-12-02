@@ -7,10 +7,10 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a class="nav-link" href="/category/blog">最近のこと</a>
+          <%= link_to '最近のこと', blogs_path(category: "最近のこと"), class: "nav-link" %>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/category/dish">ごはんレシピ</a>
+          <%= link_to 'ごはんレシピ', blogs_path(category: ""), class: "nav-link" %>
         </li>
         <!-- <li class="nav-item">
           <a class="nav-link" href="/">もぐもぐ動物病院</a>
@@ -19,6 +19,9 @@
         <% if can? :manage, current_user %>
           <li class="nav-item">
             <%= link_to "ブログ作成", new_blog_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "ログアウト", users_sign_out_path, class: "nav-link" %>
           </li>
         <% end %>
       </ul>

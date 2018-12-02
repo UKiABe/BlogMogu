@@ -1,21 +1,22 @@
 <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
-        <% @blogs.each do |blog| %>
         <div class="post-preview">
-          <a href="<%= url_for blog %>">
-            <h2 class="post-title">
-              <%= blog.title.html_safe if blog.title? %>
-            </h2>
-            <p>
-              <%= truncate(blog.content, length: 30, escape: false) %>
-            </p>
-          </a>
-          <p class="post-meta"><%= "カテゴリ:" + blog.category if blog %><br />
+          <% @blogs.each do |blog| %>
+            <a href="<%= url_for blog %>">
+              <h2 class="post-title">
+                <%= blog.title.html_safe if blog.title? %>
+              </h2>
+              <p>
+                <% text = strip_tags(blog.content) %>
+                <%= truncate(text, length: 30) %>
+              </p>
+            </a>
+            <p class="post-meta"><%= "カテゴリ:" + blog.category if blog %><br />
             投稿日: <%= blog.created_at.strftime("%Y年%m月%d日") %></p>
+            <hr>
+          <% end %>
         </div>
-        <hr>
-        <% end %>
       </div>
     </div>
       <!-- Pager -->

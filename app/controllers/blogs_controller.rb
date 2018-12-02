@@ -3,7 +3,11 @@ class BlogsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update]
 
   def index
-    @blogs = Blog.all.order(created_at: :desc)
+    if params[:category].blank?
+      @blogs = Blog.all.order(created_at: :desc)
+    else
+      @blogs = Blog.where(category: params[:category]).order(created_at: :desc)
+    end
   end
 
   def show
@@ -21,6 +25,7 @@ class BlogsController < ApplicationController
     end
 
     if @blog.save
+      flash[:success] = "新しいブログ#{@blog.title}を作成しました。"
       redirect_to blog_path(@blog)
     else
       render "new"
@@ -31,11 +36,13 @@ class BlogsController < ApplicationController
   end
 
   def update
+    flash[:success] = "#{@blog.title}を編集しました。"
     @blog.update(blog_params)
     redirect_to blog_path(@blog)
   end
 
   def destroy
+    flash[:success] = "#{@blog.title}を削除しました。"
     @blog.destroy
     redirect_to root_path
   end
