@@ -24,11 +24,14 @@ class BlogsController < ApplicationController
       redirect_to blogs_path
     end
 
-    if @blog.save
-      format.html { redirect_to blog_path(@blog), flash[:success] = "新しいブログ#{@blog.title}を作成しました。" }
-      format.json { render :show, status: :created, location: @blog}
-    else
-      render "new"
+    respond_to do |format|
+      if @blog.save
+        format.html { redirect_to @blog }
+        format.json { render :show, status: :created, location: @blog }
+      else
+        format.html { render "new" }
+        format.json { render json: @blog.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -36,9 +39,15 @@ class BlogsController < ApplicationController
   end
 
   def update
-    flash[:success] = "#{@blog.title}を編集しました。"
-    @blog.update(blog_params)
-    redirect_to blog_path(@blog)
+    respond_to do |format|
+      if @blog.update(blog_params)
+        format.html { redirect_to @blog }
+        format.json { render :show, status: :ok, location: @blog}
+      else
+        format.html { render :edit }
+        format.json { render json: @blog.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def destroy

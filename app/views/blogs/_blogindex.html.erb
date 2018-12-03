@@ -12,7 +12,7 @@
                 <%= truncate(text, length: 30) %>
               </p>
             </a>
-            <p class="post-meta"><%= "カテゴリ:" + blog.category if blog %><br />
+            <p class="post-meta"><%= "カテゴリ:" + blog.category unless blog.category.nil? %><br />
             投稿日: <%= blog.created_at.strftime("%Y年%m月%d日") %></p>
             <hr>
           <% end %>

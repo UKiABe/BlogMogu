@@ -33,10 +33,7 @@
       <% end %>
 
       <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-          <%= @blog.content.html_safe %>
-          <%= image_tag @blog.image_url %>
-        </div>
+        <%= @blog.content.html_safe %>
       </div>
     </div>
   </article>
