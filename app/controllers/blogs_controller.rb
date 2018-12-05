@@ -24,14 +24,10 @@ class BlogsController < ApplicationController
       redirect_to blogs_path
     end
 
-    respond_to do |format|
-      if @blog.save
-        format.html { redirect_to @blog }
-        format.json { render :show, status: :created, location: @blog }
-      else
-        format.html { render "new" }
-        format.json { render json: @blog.errors, status: :unprocessable_entity }
-      end
+    if @blog.save
+      redirect_to @blog
+    else
+      render "new"
     end
   end
 
@@ -39,14 +35,10 @@ class BlogsController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-      if @blog.update(blog_params)
-        format.html { redirect_to @blog }
-        format.json { render :show, status: :ok, location: @blog}
-      else
-        format.html { render :edit }
-        format.json { render json: @blog.errors, status: :unprocessable_entity }
-      end
+    if @blog.update(blog_params)
+      redirect_to @blog
+    else
+      render :edit
     end
   end
 
