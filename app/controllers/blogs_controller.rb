@@ -25,8 +25,7 @@ class BlogsController < ApplicationController
     end
 
     if @blog.save
-      flash[:success] = "新しいブログ#{@blog.title}を作成しました。"
-      redirect_to blog_path(@blog)
+      redirect_to @blog
     else
       render "new"
     end
@@ -36,9 +35,11 @@ class BlogsController < ApplicationController
   end
 
   def update
-    flash[:success] = "#{@blog.title}を編集しました。"
-    @blog.update(blog_params)
-    redirect_to blog_path(@blog)
+    if @blog.update(blog_params)
+      redirect_to @blog
+    else
+      render :edit
+    end
   end
 
   def destroy
@@ -49,7 +50,7 @@ class BlogsController < ApplicationController
 
   private
     def blog_params
-      params.require(:blog).permit(:title, :category, :content)
+      params.require(:blog).permit(:title, :category, :content, :image)
     end
 
     def find_blog
