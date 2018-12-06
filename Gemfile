@@ -17,7 +17,6 @@ gem 'bootstrap'
 gem 'jquery-rails', '~> 4.3.1'
 gem 'trix'
 gem 'shrine'
-gem 'pg'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -37,4 +36,6 @@ group :test do
   gem 'chromedriver-helper'
 end
 
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+group :production do
+  gem 'pg', '0.20.0'
+end
