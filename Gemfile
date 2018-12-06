@@ -18,6 +18,10 @@ gem 'jquery-rails', '~> 4.3.1'
 gem 'trix'
 gem 'shrine'
 
+group :production do
+  gem 'pg'
+end
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
@@ -28,10 +32,6 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'sqlite3'
-end
-
-group :production do
-  gem 'pg'
 end
 
 group :test do
