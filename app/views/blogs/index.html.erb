@@ -1,3 +1,5 @@
+<!-- カテゴリー別一覧表示のときにタイトルを変える -->
+<% provide :title, @blogs.first.category unless params[:category].nil? %>
 <body>
     <!-- Navigation -->
 <%= render "nav" %>
