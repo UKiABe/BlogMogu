@@ -28,7 +28,7 @@ function uploadAttachment(attachment) {
       var data = JSON.parse(xhr.responseText);
       return attachment.setAttributes({
         url: data.image_url,
-        href: data.url
+        // href: data.url
       })
     }
   }
